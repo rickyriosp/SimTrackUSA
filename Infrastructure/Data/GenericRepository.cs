@@ -1,18 +1,28 @@
 using Core.Entities;
 using Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        public Task<T> GetByIdAsync(int id)
+        private readonly AppDbContext _context;
+
+        public GenericRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<IReadOnlyList<T>> ListAllAsync()
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            T entity = await _context.Set<T>().FindAsync(id);
+            return entity;
+        }
+
+        public async Task<IReadOnlyList<T>> ListAllAsync()
+        {
+            List<T> entities = await _context.Set<T>().ToListAsync();
+            return entities;
         }
     }
 }
