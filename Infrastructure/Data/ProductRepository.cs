@@ -15,13 +15,21 @@ namespace Infrastructure.Data
 
         public async Task<Product> GetProductByIdAsync(int id)
         {
-            Product product = await _context.Products.FindAsync(id);
+            Product product = await _context.Products
+                .Include(p => p.ProductBrand)
+                .Include(p => p.ProductType)
+                .AsSplitQuery()
+                .FirstOrDefaultAsync(p => p.Id == id);
             return product;
         }
 
         public async Task<IReadOnlyList<Product>> GetProductsAsync()
         {
-            List<Product> products = await _context.Products.ToListAsync();
+            List<Product> products = await _context.Products
+                .Include(p => p.ProductBrand)
+                .Include(p => p.ProductType)
+                .AsSplitQuery()
+                .ToListAsync();
             return products;
         }
 
@@ -33,7 +41,7 @@ namespace Infrastructure.Data
 
         public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
         {
-            var brands = await _context.ProductBrands.ToListAsync();
+            List<ProductBrand> brands = await _context.ProductBrands.ToListAsync();
             return brands;
         }
 
@@ -45,7 +53,7 @@ namespace Infrastructure.Data
 
         public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
         {
-            var types = await _context.ProductTypes.ToListAsync();
+            List<ProductType> types = await _context.ProductTypes.ToListAsync();
             return types;
         }
     }
