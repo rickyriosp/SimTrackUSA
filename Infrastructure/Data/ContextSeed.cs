@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Data
 {
-    public class AppDbContextSeed
+    public class ContextSeed
     {
         public static async Task SeedAsync(AppDbContext context, ILoggerFactory loggerFactory)
         {
@@ -54,7 +54,7 @@ namespace Infrastructure.Data
             }
             catch (Exception ex)
             {
-                var logger = loggerFactory.CreateLogger<AppDbContextSeed>();
+                var logger = loggerFactory.CreateLogger<ContextSeed>();
                 logger.LogError(ex, "An error ocurred during data seed");
             }
         }
