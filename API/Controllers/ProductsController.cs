@@ -1,4 +1,4 @@
-using Core.Models;
+using Core.Entities;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
