@@ -21,7 +21,8 @@ namespace API
             services.AddControllers();
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(_config.GetConnectionString("DefaultConnection"),
+                o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
             services.AddSwaggerGen(c =>
             {
