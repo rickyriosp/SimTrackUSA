@@ -29,18 +29,9 @@ namespace API.Controllers
         {
             var spec = new ProductsWithTypesAndBrandsSpecification();
 
-            var products = await _products.ListAsync(spec);
-
-            IReadOnlyList<ProductToReturnDto> dtos = products.Select(product => new ProductToReturnDto
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                PictureUrl = product.PictureUrl,
-                ProductType = product.ProductType.Name,
-                ProductBrand = product.ProductBrand.Name
-            }).ToList();
+            IReadOnlyList<Product> products = await _products.ListAsync(spec);
+            IReadOnlyList<ProductToReturnDto> dtos = _mapper
+                .Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
 
             return Ok(dtos);
         }
@@ -51,7 +42,6 @@ namespace API.Controllers
             var spec = new ProductsWithTypesAndBrandsSpecification(id);
 
             Product product = await _products.GetEntityWithSpec(spec);
-
             ProductToReturnDto dto = _mapper.Map<Product, ProductToReturnDto>(product);
 
             return dto;
