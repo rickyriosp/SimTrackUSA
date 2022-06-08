@@ -1,4 +1,5 @@
 using API.Dtos;
+using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -13,12 +14,14 @@ namespace API.Controllers
         private readonly IGenericRepository<Product> _products;
         private readonly IGenericRepository<ProductBrand> _productBrands;
         private readonly IGenericRepository<ProductType> _productTypes;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IGenericRepository<Product> products, IGenericRepository<ProductBrand> productBrands, IGenericRepository<ProductType> productTypes)
+        public ProductsController(IGenericRepository<Product> products, IGenericRepository<ProductBrand> productBrands, IGenericRepository<ProductType> productTypes, IMapper mapper)
         {
             _products = products;
             _productBrands = productBrands;
             _productTypes = productTypes;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -49,16 +52,7 @@ namespace API.Controllers
 
             Product product = await _products.GetEntityWithSpec(spec);
 
-            ProductToReturnDto dto = new ProductToReturnDto
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                PictureUrl = product.PictureUrl,
-                ProductType = product.ProductType.Name,
-                ProductBrand = product.ProductBrand.Name
-            };
+            ProductToReturnDto dto = _mapper.Map<Product, ProductToReturnDto>(product);
 
             return dto;
         }
