@@ -1,3 +1,4 @@
+using API.Errors;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,8 @@ namespace API.Controllers
 
             if (thing == null)
             {
-                return NotFound();
+                int statusCode = NotFound().StatusCode;
+                return NotFound(new ApiResponse(statusCode));
             }
 
             return Ok();
@@ -38,7 +40,8 @@ namespace API.Controllers
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest();
+            int statusCode = BadRequest().StatusCode;
+            return BadRequest(new ApiResponse(statusCode));
         }
 
         [HttpGet("badrequest/{id}")]
@@ -51,8 +54,6 @@ namespace API.Controllers
         public ActionResult GetDivideByZero()
         {
             throw new DivideByZeroException();
-
-            return Ok();
         }
     }
 }
