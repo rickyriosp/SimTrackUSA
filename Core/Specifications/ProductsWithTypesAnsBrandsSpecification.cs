@@ -19,6 +19,9 @@ namespace Core.Specifications
         {
             AddInclude(p => p.ProductType);
             AddInclude(p => p.ProductBrand);
+
+            // ThenInclude Example
+            // AddInclude(“CountyOfOrigin.DefaultCountryLanguage”);
         }
     }
 }
