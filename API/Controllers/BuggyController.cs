@@ -50,7 +50,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("maths")]
+        [HttpGet("math")]
         public ActionResult GetDivideByZero()
         {
             throw new DivideByZeroException();
