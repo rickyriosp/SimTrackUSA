@@ -1,20 +1,60 @@
-<div class="d-flex flex-column flex-md-row align-items-center justify-content-between py-3 mb-4 border-bottom shadow-sm fixed-top">
-  <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-    <img src="/assets/images/simtrack-logo.jpg" style="max-height: 70px;" alt="compnay logo">
-  </a>
-
-  <nav class="d-inline-flex mt-2 mt-md-0 text-uppercase fs-4">
-    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Home</a>
-    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Shop</a>
-    <a class="me-3 py-2 text-dark text-decoration-none" href="#">Contact</a>
-  </nav>
-
-  <div class="d-flex align-items-center">
-    <a class="position-relative">
-      <i class="fa fa-shopping-cart fa-2x me-5 text-dark"></i>
-      <div class="cart-no">5</div>
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm fixed-top"
+>
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Company logo -->
+    <a href="/" class="navbar-brand">
+      <img
+        src="/assets/images/simtrack-logo.jpg"
+        style="max-height: 70px"
+        alt="compnay logo"
+      />
     </a>
-    <a class="py-2 btn btn-outline-secondary me-2">Login</a>
-    <a class="py-2 btn btn-outline-secondary me-3">Sign Up</a>
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- Center buttons -->
+      <ul class="navbar-nav ms-auto mt-2 mt-md-0 text-uppercase fs-4">
+        <li class="nav-item">
+          <a class="nav-link me-3 py-2 text-dark text-decoration-none" href="#"
+            >Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-3 py-2 text-dark text-decoration-none" href="#"
+            >Shop
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-3 py-2 text-dark text-decoration-none" href="#"
+            >Contact
+          </a>
+        </li>
+      </ul>
+
+      <!-- Right buttons -->
+      <div class="d-flex align-items-center ms-auto mt-2 mt-md-0">
+        <a class="position-relative py-2">
+          <i class="fa fa-shopping-cart fa-2x me-5 text-dark"></i>
+          <div class="cart-no">5</div>
+        </a>
+        <a class="btn btn-outline-secondary py-2 me-2">Login</a>
+        <a class="btn btn-outline-secondary py-2 me-3">Sign Up</a>
+      </div>
+    </div>
   </div>
-</div>
+</nav>
