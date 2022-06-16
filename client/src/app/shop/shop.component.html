@@ -81,6 +81,7 @@
           <button class="btn btn-outline-success">Reset</button>
         </div>
 
+        <!-- Paging header -->
         <div class="col mt-2 order-lg-0">
           <app-paging-header
             [pageNumber]="shopParams.pageNumber"
@@ -97,19 +98,13 @@
         </div>
       </div>
 
+      <!-- Pager -->
       <div class="d-flex justify-content-center">
-        <pagination
-          *ngIf="totalCount && totalCount > 0"
-          [boundaryLinks]="true"
-          [totalItems]="totalCount"
-          [itemsPerPage]="this.shopParams.pageSize"
+        <app-pager
+          [pageSize]="shopParams.pageSize"
+          [totalCount]="totalCount"
           (pageChanged)="onPageChanged($event)"
-          previousText="&lsaquo;"
-          nextText="&rsaquo;"
-          firstText="&laquo;"
-          lastText="&raquo;"
-        >
-        </pagination>
+        ></app-pager>
       </div>
     </section>
   </div>
