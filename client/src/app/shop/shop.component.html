@@ -82,8 +82,20 @@
         </div>
 
         <div class="col mt-2 order-lg-0">
-          <span
-            >Showing <strong>10</strong> of <strong>16</strong> Results
+          <span *ngIf="totalCount && totalCount > 0">
+            Showing
+            <strong>
+              {{ (shopParams.pageNumber - 1) * shopParams.pageSize + 1 }} -
+              {{
+                shopParams.pageNumber * shopParams.pageSize < totalCount
+                  ? shopParams.pageNumber * shopParams.pageSize
+                  : totalCount
+              }}
+            </strong>
+            of <strong>{{ totalCount }}</strong> Results
+          </span>
+          <span *ngIf="totalCount === 0">
+            There are <strong>0</strong> results for this filter
           </span>
         </div>
       </div>
@@ -97,6 +109,7 @@
 
       <div class="d-flex justify-content-center">
         <pagination
+          *ngIf="totalCount && totalCount > 0"
           [boundaryLinks]="true"
           [totalItems]="totalCount"
           (pageChanged)="onPageChanged($event)"
