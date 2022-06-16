@@ -17,35 +17,41 @@
         </button>
       </div>
 
+      <h5 class="text-warning ms-3">Sort</h5>
+      <select name="" id="" class="form-select my-3">
+        <option value="" selected>Alphabetical</option>
+        <option value="">Price: Low to High</option>
+        <option value="">Price: High to Low</option>
+      </select>
+
       <!-- Sidebar links -->
       <div class="collapse d-md-block" id="sidebarSection">
-        <h5 class="text-warning ms-3">Sort</h5>
-        <select name="" id="" class="form-select my-3">
-          <option value="" selected>Alphabetical</option>
-          <option value="">Price: Low to High</option>
-          <option value="">Price: High to Low</option>
-        </select>
-
         <h5 class="text-warning ms-3">Brands</h5>
         <ul class="list-group my-3">
-          <li class="list-group-item active" aria-current="true">
-            An active item
+          <li
+            class="list-group-item"
+            *ngFor="let brand of brands"
+            [class.active]="brand.id === this.brandIdSelected"
+            [value]="brand.id"
+            (click)="onBrandSelected(brand.id)"
+            aria-current="true"
+          >
+            {{ brand.name }}
           </li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
         </ul>
 
         <h5 class="text-warning ms-3 mt-3">Types</h5>
         <ul class="list-group my-3">
-          <li class="list-group-item active" aria-current="true">
-            An active item
+          <li
+            class="list-group-item"
+            *ngFor="let type of types"
+            [class.active]="type.id === this.typeIdSelected"
+            [value]="type.id"
+            (click)="onTypeSelected(type.id)"
+            aria-current="true"
+          >
+            {{ type.name }}
           </li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-          <li class="list-group-item">A fourth item</li>
-          <li class="list-group-item">And a fifth one</li>
         </ul>
       </div>
     </section>
