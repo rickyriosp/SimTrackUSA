@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
-import { ShopModule } from './shop/shop.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +19,6 @@ import { ShopModule } from './shop/shop.module';
     CoreModule,
     SharedModule,
     HomeModule,
-    ShopModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
