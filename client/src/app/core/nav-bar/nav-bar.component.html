@@ -4,7 +4,7 @@
   <!-- Container wrapper -->
   <div class="container">
     <!-- Company logo -->
-    <a href="/" class="navbar-brand">
+    <a routerLink="/" class="navbar-brand">
       <img
         src="/assets/images/simtrack-logo.jpg"
         style="max-height: 70px"
@@ -30,18 +30,24 @@
       <!-- Center buttons -->
       <ul class="navbar-nav ms-auto mt-2 mt-md-0 text-uppercase fs-4">
         <li class="nav-item">
-          <a class="nav-link me-3 py-2 text-dark text-decoration-none" href="#"
-            >Home
+          <a
+            class="nav-link me-3 py-2 text-dark text-decoration-none"
+            [routerLink]="['/']"
+          >
+            Home
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-3 py-2 text-dark text-decoration-none" href="#"
-            >Shop
+          <a
+            class="nav-link me-3 py-2 text-dark text-decoration-none"
+            routerLink="/shop"
+          >
+            Shop
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-3 py-2 text-dark text-decoration-none" href="#"
-            >Contact
+          <a class="nav-link me-3 py-2 text-dark text-decoration-none" href="#">
+            Contact
           </a>
         </li>
       </ul>
