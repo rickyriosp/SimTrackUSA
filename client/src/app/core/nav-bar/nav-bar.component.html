@@ -32,7 +32,9 @@
         <li class="nav-item">
           <a
             class="nav-link me-3 py-2 text-dark text-decoration-none"
-            [routerLink]="['/']"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
           >
             Home
           </a>
@@ -41,12 +43,13 @@
           <a
             class="nav-link me-3 py-2 text-dark text-decoration-none"
             routerLink="/shop"
+            routerLinkActive="active"
           >
             Shop
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-3 py-2 text-dark text-decoration-none" href="#">
+          <a class="nav-link me-3 py-2 text-dark text-decoration-none">
             Contact
           </a>
         </li>

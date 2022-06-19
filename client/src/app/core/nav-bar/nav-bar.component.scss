@@ -10,3 +10,9 @@
   top: -12px;
   right: 32px;
 }
+
+a {
+  &.active {
+    color: indianred !important;
+  }
+}
