@@ -17,4 +17,10 @@
   <button class="btn btn-outline-primary me-3" (click)="get500MathError()">
     Test 500 Math Error
   </button>
+
+  <div class="row mt-5" *ngIf="validationErrors">
+    <ul class="text-danger">
+      <li *ngFor="let error of validationErrors">{{ error }}</li>
+    </ul>
+  </div>
 </div>

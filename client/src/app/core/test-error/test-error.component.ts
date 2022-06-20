@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestErrorComponent implements OnInit {
   baseUrl = environment.baseUrl;
+  validationErrors: any;
 
   constructor(private http: HttpClient) {}
 
@@ -25,7 +26,10 @@ export class TestErrorComponent implements OnInit {
   get400ValidationError() {
     this.http.get(this.baseUrl + 'buggy/badrequest/fortytwo').subscribe({
       next: (response) => console.log(response),
-      error: (err) => console.log(err),
+      error: (err) => {
+        console.log(err);
+        this.validationErrors = err.errors;
+      },
     });
   }
 
