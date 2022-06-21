@@ -2,70 +2,72 @@
   <div class="row gy-2">
     <!-- Sidebar -->
     <section class="col-12 col-md-3">
-      <div class="d-grid d-block d-md-none">
-        <!-- Toggle button -->
-        <button
-          class="btn btn-outline-secondary mb-2"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#sidebarSection"
-          aria-controls="sidebarSection"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+      <ng-container *ngIf="types && brands">
+        <div class="d-grid d-block d-md-none">
+          <!-- Toggle button -->
+          <button
+            class="btn btn-outline-secondary mb-2"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#sidebarSection"
+            aria-controls="sidebarSection"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon">Filter</span>
+          </button>
+        </div>
+
+        <!-- Sorting -->
+        <h5 class="text-primary ms-3">Sort</h5>
+        <select
+          class="form-select my-3"
+          (change)="onSortSelected($event.target.value)"
         >
-          <span class="navbar-toggler-icon">Filter</span>
-        </button>
-      </div>
+          <option *ngFor="let sort of sortOptions" [value]="sort.value">
+            {{ sort.name }}
+          </option>
+        </select>
 
-      <!-- Sorting -->
-      <h5 class="text-primary ms-3">Sort</h5>
-      <select
-        class="form-select my-3"
-        (change)="onSortSelected($event.target.value)"
-      >
-        <option *ngFor="let sort of sortOptions" [value]="sort.value">
-          {{ sort.name }}
-        </option>
-      </select>
+        <!-- Filters -->
+        <div class="collapse d-md-block" id="sidebarSection">
+          <!-- Brands -->
+          <h5 class="text-primary ms-3">Brands</h5>
+          <ul class="list-group my-3">
+            <li
+              class="list-group-item"
+              *ngFor="let brand of brands"
+              [class.active]="brand.id === this.shopParams.brandId"
+              [value]="brand.id"
+              (click)="onBrandSelected(brand.id)"
+              aria-current="true"
+            >
+              {{ brand.name }}
+            </li>
+          </ul>
 
-      <!-- Filters -->
-      <div class="collapse d-md-block" id="sidebarSection">
-        <!-- Brands -->
-        <h5 class="text-primary ms-3">Brands</h5>
-        <ul class="list-group my-3">
-          <li
-            class="list-group-item"
-            *ngFor="let brand of brands"
-            [class.active]="brand.id === this.shopParams.brandId"
-            [value]="brand.id"
-            (click)="onBrandSelected(brand.id)"
-            aria-current="true"
-          >
-            {{ brand.name }}
-          </li>
-        </ul>
-
-        <!-- Types -->
-        <h5 class="text-primary ms-3 mt-3">Types</h5>
-        <ul class="list-group my-3">
-          <li
-            class="list-group-item"
-            *ngFor="let type of types"
-            [class.active]="type.id === this.shopParams.typeId"
-            [value]="type.id"
-            (click)="onTypeSelected(type.id)"
-            aria-current="true"
-          >
-            {{ type.name }}
-          </li>
-        </ul>
-      </div>
+          <!-- Types -->
+          <h5 class="text-primary ms-3 mt-3">Types</h5>
+          <ul class="list-group my-3">
+            <li
+              class="list-group-item"
+              *ngFor="let type of types"
+              [class.active]="type.id === this.shopParams.typeId"
+              [value]="type.id"
+              (click)="onTypeSelected(type.id)"
+              aria-current="true"
+            >
+              {{ type.name }}
+            </li>
+          </ul>
+        </div>
+      </ng-container>
     </section>
 
     <!-- Main section -->
     <section class="col-12 col-md-9">
       <!-- Results and Search -->
-      <div class="row row-cols-1 row-cols-md-auto g-3 mb-2">
+      <div class="row row-cols-1 row-cols-md-auto g-3 mb-3 form-inline align-items-center" *ngIf="products">
         <!-- Search box -->
         <div class="col ms-lg-auto mt-2 me-2 order-lg-1">
           <input

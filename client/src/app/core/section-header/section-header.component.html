@@ -1,14 +1,20 @@
 <!--Async pipe subscribes to the observable, and unsubscribes when component is destroyed-->
-<ng-container *ngIf="(breadcrumb$ | async) as breadcrumbs">
-  <section *ngIf="breadcrumbs.length > 0 && breadcrumbs[breadcrumbs.length-1].label !== 'Home'" class="bg-light py-5"
-           style="margin-top: 110px;">
+<ng-container *ngIf="breadcrumb$ | async as breadcrumbs">
+  <section
+    *ngIf="
+      breadcrumbs.length > 0 &&
+      breadcrumbs[breadcrumbs.length - 1].label !== 'Home'
+    "
+    class="py-5"
+    style="margin-top: 110px"
+  >
     <div class="container">
       <div class="row d-flex align-items-center">
         <div class="col-12 col-md-8">
-          <h1>{{breadcrumbs[breadcrumbs.length - 1].label}}</h1>
+          <h1>{{ breadcrumbs[breadcrumbs.length - 1].label }}</h1>
         </div>
         <div class="col-12 col-md-4">
-          <nav aria-label="breadcrumb">
+          <nav class="float-md-end" aria-label="breadcrumb">
             <xng-breadcrumb></xng-breadcrumb>
           </nav>
         </div>
