@@ -21,7 +21,7 @@
         <!-- Sorting -->
         <h5 class="text-primary ms-3">Sort</h5>
         <select
-          class="form-select my-3"
+          class="form-select my-4"
           (change)="onSortSelected($event.target.value)"
         >
           <option *ngFor="let sort of sortOptions" [value]="sort.value">
@@ -33,7 +33,7 @@
         <div class="collapse d-md-block" id="sidebarSection">
           <!-- Brands -->
           <h5 class="text-primary ms-3">Brands</h5>
-          <ul class="list-group my-3">
+          <ul class="list-group my-4">
             <li
               class="list-group-item"
               *ngFor="let brand of brands"
@@ -48,7 +48,7 @@
 
           <!-- Types -->
           <h5 class="text-primary ms-3 mt-3">Types</h5>
-          <ul class="list-group my-3">
+          <ul class="list-group my-4">
             <li
               class="list-group-item"
               *ngFor="let type of types"
@@ -67,7 +67,7 @@
     <!-- Main section -->
     <section class="col-12 col-md-9">
       <!-- Results and Search -->
-      <div class="row row-cols-1 row-cols-md-auto g-3 mb-3 form-inline align-items-center" *ngIf="products">
+      <div class="row row-cols-1 row-cols-md-auto form-inline align-items-center g-3 mb-3" *ngIf="products">
         <!-- Search box -->
         <div class="col ms-lg-auto mt-2 me-2 order-lg-1">
           <input
