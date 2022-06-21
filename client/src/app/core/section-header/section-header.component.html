@@ -1,7 +1,7 @@
 <!--Async pipe subscribes to the observable, and unsubscribes when component is destroyed-->
 <ng-container *ngIf="(breadcrumb$ | async) as breadcrumbs">
   <section *ngIf="breadcrumbs.length > 0 && breadcrumbs[breadcrumbs.length-1].label !== 'Home'" class="bg-light py-5"
-           style="margin-top: 100px;">
+           style="margin-top: 110px;">
     <div class="container">
       <div class="row d-flex align-items-center">
         <div class="col-12 col-md-8">
