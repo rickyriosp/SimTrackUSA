@@ -2,58 +2,57 @@ using API.Errors;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Controllers;
+
+public class BuggyController : BaseApiController
 {
-    public class BuggyController : BaseApiController
+    private readonly AppDbContext _context;
+
+    public BuggyController(AppDbContext context)
     {
-        private readonly AppDbContext _context;
+        _context = context;
+    }
 
-        public BuggyController(AppDbContext context)
+    [HttpGet("notfound")]
+    public ActionResult GetNotFoundRequest()
+    {
+        var thing = _context.Products.Find(42);
+
+        if (thing == null)
         {
-            _context = context;
+            var statusCode = NotFound().StatusCode;
+            return NotFound(new ApiResponse(statusCode));
         }
 
-        [HttpGet("notfound")]
-        public ActionResult GetNotFoundRequest()
-        {
-            var thing = _context.Products.Find(42);
+        return Ok();
+    }
 
-            if (thing == null)
-            {
-                int statusCode = NotFound().StatusCode;
-                return NotFound(new ApiResponse(statusCode));
-            }
+    [HttpGet("servererror")]
+    public ActionResult GetServerError()
+    {
+        var thing = _context.Products.Find(42);
 
-            return Ok();
-        }
+        var thingToReturn = thing.ToString();
 
-        [HttpGet("servererror")]
-        public ActionResult GetServerError()
-        {
-            var thing = _context.Products.Find(42);
+        return Ok();
+    }
 
-            var thingToReturn = thing.ToString();
+    [HttpGet("badrequest")]
+    public ActionResult GetBadRequest()
+    {
+        var statusCode = BadRequest().StatusCode;
+        return BadRequest(new ApiResponse(statusCode));
+    }
 
-            return Ok();
-        }
+    [HttpGet("badrequest/{id}")]
+    public ActionResult GetBadRequest(int id)
+    {
+        return Ok();
+    }
 
-        [HttpGet("badrequest")]
-        public ActionResult GetBadRequest()
-        {
-            int statusCode = BadRequest().StatusCode;
-            return BadRequest(new ApiResponse(statusCode));
-        }
-
-        [HttpGet("badrequest/{id}")]
-        public ActionResult GetBadRequest(int id)
-        {
-            return Ok();
-        }
-
-        [HttpGet("math")]
-        public ActionResult GetDivideByZero()
-        {
-            throw new DivideByZeroException();
-        }
+    [HttpGet("math")]
+    public ActionResult GetDivideByZero()
+    {
+        throw new DivideByZeroException();
     }
 }

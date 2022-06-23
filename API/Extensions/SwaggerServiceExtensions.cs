@@ -1,25 +1,24 @@
 using Microsoft.OpenApi.Models;
 
-namespace API.Extensions
+namespace API.Extensions;
+
+public static class SwaggerServiceExtensions
 {
-    public static class SwaggerServiceExtensions
+    public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
     {
-        public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
+        services.AddSwaggerGen(c =>
         {
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SimTrackUSA API", Version = "v1" });
-            });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "SimTrackUSA API", Version = "v1" });
+        });
 
-            return services;
-        }
+        return services;
+    }
 
-        public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app)
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SimTrackUSA API v1"));
+    public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app)
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SimTrackUSA API v1"));
 
-            return app;
-        }
+        return app;
     }
 }

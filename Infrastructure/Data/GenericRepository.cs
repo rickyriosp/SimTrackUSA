@@ -3,50 +3,49 @@ using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Data
+namespace Infrastructure.Data;
+
+public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    private readonly AppDbContext _context;
+
+    public GenericRepository(AppDbContext context)
     {
-        private readonly AppDbContext _context;
+        _context = context;
+    }
 
-        public GenericRepository(AppDbContext context)
-        {
-            _context = context;
-        }
+    public async Task<T> GetByIdAsync(int id)
+    {
+        var entity = await _context.Set<T>().FindAsync(id);
+        return entity;
+    }
 
-        public async Task<T> GetByIdAsync(int id)
-        {
-            T entity = await _context.Set<T>().FindAsync(id);
-            return entity;
-        }
+    public async Task<IReadOnlyList<T>> ListAllAsync()
+    {
+        var entities = await _context.Set<T>().ToListAsync();
+        return entities;
+    }
 
-        public async Task<IReadOnlyList<T>> ListAllAsync()
-        {
-            List<T> entities = await _context.Set<T>().ToListAsync();
-            return entities;
-        }
+    public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
+    {
+        var entity = await ApplySpecification(spec).FirstOrDefaultAsync();
+        return entity;
+    }
 
-        public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
-        {
-            T entity = await ApplySpecification(spec).FirstOrDefaultAsync();
-            return entity;
-        }
+    public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
+    {
+        var entities = await ApplySpecification(spec).ToListAsync();
+        return entities;
+    }
 
-        public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
-        {
-            List<T> entities = await ApplySpecification(spec).ToListAsync();
-            return entities;
-        }
+    public async Task<int> CountAsync(ISpecification<T> spec)
+    {
+        return await ApplySpecification(spec).CountAsync();
+    }
 
-        public async Task<int> CountAsync(ISpecification<T> spec)
-        {
-            return await ApplySpecification(spec).CountAsync();
-        }
-
-        private IQueryable<T> ApplySpecification(ISpecification<T> spec)
-        {
-            var query = SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
-            return query;
-        }
+    private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+    {
+        var query = SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
+        return query;
     }
 }
