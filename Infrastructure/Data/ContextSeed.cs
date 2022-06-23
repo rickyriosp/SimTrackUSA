@@ -55,7 +55,7 @@ namespace Infrastructure.Data
             catch (Exception ex)
             {
                 var logger = loggerFactory.CreateLogger<ContextSeed>();
-                logger.LogError(ex, "An error ocurred during data seed");
+                logger.LogError(ex, "An error occurred during data seed");
             }
         }
     }
