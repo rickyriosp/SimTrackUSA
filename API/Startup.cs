@@ -25,7 +25,7 @@ public class Startup
             options.UseSqlite(_config.GetConnectionString("DefaultConnection"),
                 o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
-        services.AddSingleton(config =>
+        services.AddSingleton<IConnectionMultiplexer>(provider =>
         {
             var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"), true);
             return ConnectionMultiplexer.Connect(configuration);
