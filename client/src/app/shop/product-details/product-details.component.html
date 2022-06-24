@@ -14,13 +14,20 @@
         <i
           class="fa-solid fa-circle-minus text-primary fs-4 me-2"
           style="cursor: pointer"
+          (click)="decrementItemQty()"
         ></i>
-        <span class="fw-bold fs-5">2</span>
+        <span class="fw-bold fs-5">{{ quantity }}</span>
         <i
           class="fa-solid fa-circle-plus text-primary fs-4 mx-2"
           style="cursor: pointer"
+          (click)="incrementItemQty()"
         ></i>
-        <button class="btn btn-outline-primary btn-lg ms-4">Add to Cart</button>
+        <button
+          class="btn btn-outline-primary btn-lg ms-4"
+          (click)="addItemToBasket()"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
 
