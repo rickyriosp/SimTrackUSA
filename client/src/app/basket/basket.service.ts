@@ -25,7 +25,10 @@ export class BasketService {
 
   setBasket(basket: IBasket) {
     this.http.post(this.baseUrl + 'basket', basket).subscribe({
-      next: (response: IBasket) => this.basketSource.next(response),
+      next: (response: IBasket) => {
+        this.basketSource.next(response);
+        console.log(response);
+      },
       error: (err) => console.log(err),
     });
   }
