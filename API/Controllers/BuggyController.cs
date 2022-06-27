@@ -1,5 +1,6 @@
 using API.Errors;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -54,5 +55,12 @@ public class BuggyController : BaseApiController
     public ActionResult GetDivideByZero()
     {
         throw new DivideByZeroException();
+    }
+
+    [HttpGet("testauth")]
+    [Authorize]
+    public ActionResult<string> GetSecretText()
+    {
+        return Ok("secret stuff");
     }
 }
