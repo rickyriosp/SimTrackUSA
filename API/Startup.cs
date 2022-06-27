@@ -37,8 +37,8 @@ public class Startup
         });
 
         // Custom extension methods
-        services.AddIdentityServices();
         services.AddApplicationServices();
+        services.AddIdentityServices(_config);
 
         services.AddAutoMapper(typeof(MappingProfiles));
         services.AddHttpContextAccessor();
@@ -75,6 +75,7 @@ public class Startup
 
         app.UseCors("CorsPolicy");
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
