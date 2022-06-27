@@ -25,7 +25,8 @@ public static class IdentityServiceExtensions
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"])),
                     ValidIssuer = config["Token:Issuer"],
                     ValidateIssuer = true,
-                    ValidateLifetime = true
+                    ValidateLifetime = true,
+                    ValidateAudience = false
                 };
             });
 
