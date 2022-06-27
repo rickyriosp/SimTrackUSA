@@ -1,6 +1,7 @@
 using API.Extensions;
 using API.Helpers;
 using Infrastructure.Data;
+using Infrastructure.Identity;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
@@ -23,6 +24,10 @@ public class Startup
 
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlite(_config.GetConnectionString("DefaultConnection"),
+                o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
+
+        services.AddDbContext<AppIdentityDbContext>(options =>
+            options.UseSqlite(_config.GetConnectionString("IdentityConnection"),
                 o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
         services.AddSingleton<IConnectionMultiplexer>(provider =>
