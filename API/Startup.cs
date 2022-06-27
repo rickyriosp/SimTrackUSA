@@ -36,6 +36,8 @@ public class Startup
             return ConnectionMultiplexer.Connect(configuration);
         });
 
+        // Custom extension methods
+        services.AddIdentityServices();
         services.AddApplicationServices();
 
         services.AddAutoMapper(typeof(MappingProfiles));
