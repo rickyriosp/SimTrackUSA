@@ -35,4 +35,26 @@ public class AccountController : BaseApiController
             Token = "this will be a token"
         };
     }
+
+    [HttpPost("register")]
+    public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+    {
+        var user = new AppUser
+        {
+            DisplayName = registerDto.DisplayName,
+            Email = registerDto.Email,
+            UserName = registerDto.Email
+        };
+
+        var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+        if (!result.Succeeded) return BadRequest(new ApiResponse(BadRequest().StatusCode));
+
+        return new UserDto
+        {
+            DisplayName = registerDto.DisplayName,
+            Email = registerDto.Email,
+            Token = "this will be a token"
+        };
+    }
 }
