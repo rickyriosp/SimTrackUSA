@@ -1,6 +1,6 @@
-using System.Security.Claims;
 using API.Dtos;
 using API.Errors;
+using API.Extensions;
 using Core.Entities.Identity;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -27,8 +27,7 @@ public class AccountController : BaseApiController
     [Authorize]
     public async Task<ActionResult<UserDto>> GetCurrentUser()
     {
-        var email = User.FindFirstValue(ClaimTypes.Email);
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindUserByClaimsPrincipleAsync(User);
 
         return new UserDto
         {
@@ -48,8 +47,7 @@ public class AccountController : BaseApiController
     [Authorize]
     public async Task<ActionResult<Address>> GetUserAddressAsync()
     {
-        var email = User.FindFirstValue(ClaimTypes.Email);
-        var user = await _userManager.FindByEmailAsync(email);
+        var user = await _userManager.FindUserByClaimsPrincipleWithAddressAsync(User);
 
         return user.Address;
     }
