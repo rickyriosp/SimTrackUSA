@@ -67,8 +67,16 @@
             {{ basket.items.length }}
           </div>
         </a>
-        <a class="btn btn-outline-secondary py-2 me-2">Login</a>
-        <a class="btn btn-outline-secondary py-2 me-3">Sign Up</a>
+        <a class="btn btn-outline-secondary py-2 me-2"
+           routerLink="/account/login"
+           routerLinkActive="active">
+          Login
+        </a>
+        <a class="btn btn-outline-secondary py-2 me-3"
+           routerLink="/account/register"
+           routerLinkActive="active">
+          Sign Up
+        </a>
       </div>
     </div>
   </div>
